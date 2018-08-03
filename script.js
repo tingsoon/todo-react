@@ -1,6 +1,6 @@
 class List extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
     this.changeHandler = this.changeHandler.bind( this );
     this.handleClick = this.handleClick.bind( this );
     this.handleRemove = this.handleRemove.bind( this );
@@ -44,8 +44,8 @@ class List extends React.Component {
   //   this.setState( {list: removeTask})
   // }
 
-  handleRemove(props) {
-    this.state.list.splice(props, 1);
+  handleRemove(id) {
+    this.state.list.splice(id, 1);
     console.log(this.state.list)
     this.setState( {list: this.state.list})
   }
