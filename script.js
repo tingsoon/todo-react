@@ -1,9 +1,10 @@
 class List extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.changeHandler = this.changeHandler.bind( this );
     this.handleClick = this.handleClick.bind( this );
     this.handleRemove = this.handleRemove.bind( this );
+    
   }
 
   state = {
@@ -34,19 +35,30 @@ class List extends React.Component {
     this.setState( {list: allList })
   }
 
-  handleRemove(id) {
-    let removeTask = this.state.list.filter((list) => {
-      if (list.id == id) {
-        return list
-      }
-    })
-    this.setState( {list: removeTask})
+  // handleRemove(id) {
+  //   let removeTask = this.state.list.filter((list) => {
+  //     if (list.id == id) {
+  //       return list
+  //     }
+  //   })
+  //   this.setState( {list: removeTask})
+  // }
+
+  handleRemove(props) {
+    this.state.list.splice(props, 1);
+    console.log(this.state.list)
+    this.setState( {list: this.state.list})
   }
+
+
 
   render() {
       // render the list with a map() here
-      let tasks = this.state.list.map( (item, i) => {
-                  return <li key={i}>{ item }</li>
+      let tasks = this.state.list.map( (item, id) => {
+                  return <li key={id}>
+                  { item } 
+                  <button onClick={event => this.handleRemove(id)}>Remove item</button>
+                  </li>
       })
       console.log("rendering");
       return (
@@ -58,7 +70,6 @@ class List extends React.Component {
           </div>
           <div>
             {tasks}
-            <button onClick={this.handleRemove}>Remove item</button>
           </div>
         </div>
       );
